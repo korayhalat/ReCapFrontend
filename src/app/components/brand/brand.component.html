@@ -5,7 +5,11 @@
 </div>
 
 <ul class="list-group mt-2">
-  <li [class]="getAllBrandClass()" routerLink="/cars">Tüm Markalar</li>
+  <li [class]="getAllBrandClass()" routerLink="/cars">
+    <div class="p-3 mb-2 bg-secondary text-white">
+      Tüm Markalar
+    </div>
+  </li>
 
   <li (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" 
     *ngFor="let brand of brands | brandFilter: brandFilterText"

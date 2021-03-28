@@ -3,27 +3,20 @@
     <input type="text" [(ngModel)]="colorFilterText" 
     class="form-control" id="colorFilterText" placeholder="Arama İfadesi">
   </div> -->
-  
-  <ul class="list-group mt-2">
-    <li [class]="getAllColorClass()" (click)="setAllColor()" routerLink="/colors">Tüm Renkler</li>
-    
-    <li (click)="setCurrentColor(color)" routerLink="/cars/colors/{{ color.colorId }}" 
-      *ngFor="let color of colors | colorFilter:colorFilterText" 
-      [class]="getCurrentColorClass(color)">
-      {{ color.colorName }}
-    </li>
-  </ul>
-  
-  <h5 class="header mt-2" *ngIf="currentColor">{{ currentColor.colorName }} Seçtiniz</h5>
-  
-  <!-- <ul class="list-group mt-2">
-    <li [class]="getAllBrandClass()" routerLink="/cars">Tüm Markalar</li>
-  
-    <li (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" 
-      *ngFor="let brand of brands | brandFilter: brandFilterText"
-       [class]="getCurrentBrandClass(brand)">
-      {{ brand.brandName }}
-    </li>
-  </ul>
-  <h5 class="header mt-2" *ngIf="currentBrand">{{ currentBrand.brandName }} Seçtiniz</h5> -->
-  
+
+<ul class="list-group">
+
+
+  <li [class]="getAllColorClass()" (click)="setAllColor()" routerLink="/colors">
+    <div class="p-3 mb-2 bg-secondary text-white">
+      Tüm Renkler
+    </div>
+  </li>
+
+
+
+  <li (click)="setCurrentColor(color)" routerLink="/cars/colors/{{ color.colorId }}" class="list-group-item"
+    aria-current="true" *ngFor="let color of colors " [class]="getCurrentColorClass(color)"> {{ color.colorName }} </li>
+</ul>
+
+<h5 class="header mt-2" *ngIf="currentColor">{{ currentColor.colorName }} Seçtiniz</h5>
