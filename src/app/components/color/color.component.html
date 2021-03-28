@@ -1,17 +1,29 @@
-<div class="mb-3">
+<!-- <div class="mb-3">
     <label for="colorFilterText" class="form-label">Renk Ara</label>
     <input type="text" [(ngModel)]="colorFilterText" 
     class="form-control" id="colorFilterText" placeholder="Arama İfadesi">
-  </div>
+  </div> -->
   
   <ul class="list-group mt-2">
-    <li [class]="getAllColorClass()" (click)="getAllColorClass()" routerLink="/cars">
-      Tüm Renkler
-    </li>
-    <li routerLink="/cars/colors/{{ color.colorId }}" *ngFor="let color of colors | colorFilter:colorFilterText" (click)="setCurrentColor(color)"
+    <li [class]="getAllColorClass()" (click)="setAllColor()" routerLink="/colors">Tüm Renkler</li>
+    
+    <li (click)="setCurrentColor(color)" routerLink="/cars/colors/{{ color.colorId }}" 
+      *ngFor="let color of colors | colorFilter:colorFilterText" 
       [class]="getCurrentColorClass(color)">
       {{ color.colorName }}
     </li>
   </ul>
   
   <h5 class="header mt-2" *ngIf="currentColor">{{ currentColor.colorName }} Seçtiniz</h5>
+  
+  <!-- <ul class="list-group mt-2">
+    <li [class]="getAllBrandClass()" routerLink="/cars">Tüm Markalar</li>
+  
+    <li (click)="setCurrentBrand(brand)" routerLink="/cars/brands/{{brand.brandId}}" 
+      *ngFor="let brand of brands | brandFilter: brandFilterText"
+       [class]="getCurrentBrandClass(brand)">
+      {{ brand.brandName }}
+    </li>
+  </ul>
+  <h5 class="header mt-2" *ngIf="currentBrand">{{ currentBrand.brandName }} Seçtiniz</h5> -->
+  
