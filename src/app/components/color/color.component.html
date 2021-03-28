@@ -1,12 +1,17 @@
-<table *ngIf ="dataLoaded == true" class="table">
-    <thead>
-        <tr>
-            <th>Color Id</th>
-            <th>Color Name</th>
-        </tr>
-    </thead>
-    <tr *ngFor = "let color of colors">
-        <td>{{color.colorId}}</td>
-        <td>{{color.colorName}}</td>
-    </tr>
-</table>
+<div class="mb-3">
+    <label for="colorFilterText" class="form-label">Renk Ara</label>
+    <input type="text" [(ngModel)]="colorFilterText" 
+    class="form-control" id="colorFilterText" placeholder="Arama İfadesi">
+  </div>
+  
+  <ul class="list-group mt-2">
+    <li [class]="getAllColorClass()" (click)="getAllColorClass()" routerLink="/cars">
+      Tüm Renkler
+    </li>
+    <li routerLink="/cars/colors/{{ color.colorId }}" *ngFor="let color of colors | colorFilter:colorFilterText" (click)="setCurrentColor(color)"
+      [class]="getCurrentColorClass(color)">
+      {{ color.colorName }}
+    </li>
+  </ul>
+  
+  <h5 class="header mt-2" *ngIf="currentColor">{{ currentColor.colorName }} Seçtiniz</h5>
