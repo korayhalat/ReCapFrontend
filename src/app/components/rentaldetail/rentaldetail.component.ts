@@ -21,8 +21,8 @@ export class RentaldetailComponent implements OnInit {
     this.rentalDetailService.getRentalDetails().subscribe(response=>{
       this.rentaldetails=response.data;
       
-      this.rentaldetails.forEach(k=>{
-        k.rentDate = new Date(k.rentDate).toLocaleDateString();
+      this.rentaldetails.forEach(x=>{
+        x.rentDate = new Date(x.rentDate).toLocaleDateString();
       })
       this.dataLoaded=true;
     })

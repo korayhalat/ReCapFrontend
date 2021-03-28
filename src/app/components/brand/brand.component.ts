@@ -40,7 +40,7 @@ export class BrandComponent implements OnInit {
     this.currentBrand=null;
   }
   
-  getAllBrandClasss(){
+  getAllBrandClass(){
     if(!this.currentBrand){
       return "list-group-item list-group-item-dark"
     }else{

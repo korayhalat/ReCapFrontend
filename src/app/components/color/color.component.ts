@@ -26,16 +26,22 @@ export class ColorComponent implements OnInit {
       this.dataLoaded=true
     })
   }
+
+  setCurrentColor(color:Color){
+    this.currentColor = color;
+  }
+
   getCurrentColorClass(color:Color){
-    if(this.currentColor==color){
+    if(color==this.currentColor){
       return 'list-group-item list-group-item-dark';
     }else{
       return 'list-grop-item';
     }
   }
-  setCurrentColor(color:Color){
-    this.currentColor = color;
+  setAllColor(){
+    this.currentColor=null;
   }
+  
   getAllColorClass(){
     if(!this.currentColor){
       return 'list-group-item list-group-item-dark';
