@@ -1,0 +1,60 @@
+<div *ngIf="car" class="p-d-flex">
+    <div class="p-col-12 p-md-3">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="brandName">Brand Name</label>
+                <input id="brandName" readonly value="{{car.brandText}}" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="colorName">Color Name</label>
+                <input id="colorName" readonly value="{{car.colorText}}" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="dailyPrice">Daily Price</label>
+                <input id="dailyPrice" readonly readonly value="{{car.dailyPrice}}" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="modelYear">Model Year</label>
+                <input id="modelYear" readonly value="{{car.modelYear}}" type="text" pInputText>
+            </div>
+            <div class="p-field">
+                <label for="description">Description</label>
+                <input id="description" readonly value="{{car.description}}" type="text" pInputText>
+            </div>
+        </div>
+    </div>
+    <p-divider layout="vertical"></p-divider>
+    <div class="p-col-12 p-md-9">
+
+        <p-galleria [(value)]="images" 
+            [containerStyle]="{'max-width': '900px', 'margin-top':'2em'}" [numVisible]="5" 
+            thumbnailsPosition="bottom">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="apiUrl+item.imagePath" style="width: 100%; display :block" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="p-grid p-nogutter p-justify-center">
+                    <img [src]="apiUrl+item.imagePath" 
+                    style = " width: 100%; display:inline-block" />
+                </div>
+            </ng-template>
+        </p-galleria>
+
+        <!-- <p-galleria *ngIf="images && images.length>0" [(value)]="images"  
+            [containerStyle]="{'width':'95%','max-width': '900px','min-width':'350px'}"
+            [numVisible]="5" [circular]="true" [showItemNavigators]= " images.length > 1" 
+            [showItemNavigatorsOnHover]="true"
+            [showThumbnails]=" images.length > 1">
+            <ng-template pTemplate="item" let-item>
+                <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo' + item.id" 
+                style="width: 100%; display: block;"/>
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="p-grid p-nogutter p-justify-center">
+                    <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo '+ item.id" 
+                    style="width: 100%; display: block;"/>
+                </div>
+            </ng-template>
+        </p-galleria> -->
+    </div>
+</div>

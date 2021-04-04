@@ -1,5 +1,4 @@
-export interface Color{
+export interface IColor {
     colorId:number;
     colorName:string;
-
 }

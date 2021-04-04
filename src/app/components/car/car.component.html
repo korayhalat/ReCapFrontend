@@ -1,24 +1,63 @@
-<table class="table table-secondary table-striped mt-2">
-    <thead>
+
+<!-- [(selection)]="selectedCar" selectionMode="single" dataKey="id" -->
+<p-table #dt [value]="cars" >
+    <ng-template pTemplate="header">
         <tr>
-            <th>Car Id</th>
-            <th>Brand Id</th>
+            <th>Brand</th>
+            <th>Color</th>
             <th>Model Year</th>
-            <th>Description</th>
             <th>Daily Price</th>
-            <th></th>
+            <th>Gear Type</th>
+            <th>Return Date</th>
+            <th>Detail</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let car of cars | carDetailFilter:carFilterText" 
-            (click)="getCarDetailByCarId(car.id)"
-            routerLink="/cars/carimages/{{ car.id }}">
-            <td>{{ car.id}}</td>
-            <td>{{ car.brandId }}</td>
-            <td>{{ car.modelYear }}</td>
-            <td>{{ car.description }}</td>
-            <td>{{ car.dailyPrice }}</td>
-            <td><button class=" btn btn-sm btn-outline-danger">Kiralık</button></td>
+        <tr>
+            <th>
+                <p-multiSelect [options]="brandOpt" (onChange)="dt.filter($event.value,'brandText','in')"
+                    [style]="{'width':'100%', backgroundColor:'var(--indigo-100)'}"></p-multiSelect>
+            </th>
+            <th>
+                <p-multiSelect [options]="colorOpt" (onChange)="dt.filter($event.value,'colorText','in')"
+                    [style]="{'width':'100%', backgroundColor:'var(--indigo-100)'}"></p-multiSelect>
+            </th>
+            <th>
+                <p-multiSelect [options]="modelOpt" (onChange)="dt.filter($event.value,'modelYear','in')"
+                    [style]="{'width':'100%', backgroundColor:'var(--indigo-100)'}"></p-multiSelect>
+
+            <th>
+
+                <p-columnFilter type="text" field="name"></p-columnFilter>
+            </th>
+            <th>
+                <p-columnFilter type="text" field="country.name"></p-columnFilter>
+            </th>
+
+            <th>
+
+            </th>
+            <th>
+                <p-columnFilter type="boolean" field="verified"></p-columnFilter>
+            </th>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+    <ng-template pTemplate="body" let-car>
+        <!-- [pSelectableRow]="car" -->
+        <tr >
+            
+            <td>{{car.brandText}}</td>
+            <td>{{car.colorText}}</td>
+            <td>{{car.modelYear}}</td>
+            <td>{{car.dailyPrice}}</td>
+            <td>{{car.description}}</td>
+            <td>
+                <span *ngIf="car.isRented">{{car.returnDate}}</span>
+                <p-button *ngIf="!car.isRented">Rent </p-button>
+            </td>
+            <td>
+                <p-button (click) = "getCarDetail(car)">Detail</p-button>
+            </td>
+        
+        </tr>
+
+    </ng-template>
+</p-table>

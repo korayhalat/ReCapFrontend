@@ -15,24 +15,25 @@ export class CarimageComponent implements OnInit {
   carImage : CarImages[];
   imagePath = 'http://localhost:61529';
   carDetail :CarDetail;
+  carId:number | null;
 
   constructor(
     private carImageService : CarImagesService,
-    private ativadeRoute : ActivatedRoute,
+    private activadeRoute : ActivatedRoute,
     private carDetailService : CarDetailService
   ) { }
 
   ngOnInit(): void {
-    this.ativadeRoute.params.subscribe(params =>{
+    this.activadeRoute.params.subscribe(params =>{
       if(params[('carId')]){
-        this.getCarsDetail(params[('carId')]);
+        this.getImagePath(params[('carId')]);
         this.getCarsImage(params[('carId')])
       }
     })
   }
 
   getCarsImage(carId:number){
-    this.carImageService.getCarImages().subscribe(response =>{
+    this.carImageService.getCarImagesById(carId).subscribe(response =>{
       this.carImage=response.data;
     })
   }
@@ -44,6 +45,16 @@ export class CarimageComponent implements OnInit {
       this.carDetail = response.data[0]
     })
   }
-
+  getCarImagesById(carId:number){
+    this.carImageService.getCarImagesById(carId).subscribe(response=>{
+      this.carImage = response.data
+    })
+  }
+  getByCarId(carId:number){
+    this.carImageService.getCarImagesById(carId).subscribe(response=>{
+      this.carImage=response.data
+    })
+  }
+  
 
 }

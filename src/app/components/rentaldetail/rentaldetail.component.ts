@@ -15,8 +15,8 @@ export class RentaldetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRentalDetails;
-
   }
+
   getRentalDetails(){
     this.rentalDetailService.getRentalDetails().subscribe(response=>{
       this.rentaldetails=response.data;

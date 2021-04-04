@@ -21,5 +21,7 @@ export class CardetailComponent implements OnInit {
       this.cardetails = responce.data;
     })
   }
+  
+  
 
 }
