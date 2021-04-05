@@ -1,6 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ICar } from 'src/app/models/car';
+import { IRentalDetail } from 'src/app/models/rental-detail';
 import { CarService } from 'src/app/services/car.service';
+import { RentalDetailService } from 'src/app/services/rental-detail.service';
+import { CarOperationComponent } from '../car-operation/car-operation.component';
 
 @Component({
   selector: 'app-car',
@@ -18,7 +21,7 @@ export class CarComponent implements OnInit {
 
   @Output() carDetail = new EventEmitter<ICar>();
 
-  constructor(private carService:CarService) { }
+  constructor(private carService:CarService,private rentService: RentalDetailService) { }
 
   ngOnInit(): void {
     this.carService.getAll().subscribe(res=>{
@@ -40,5 +43,15 @@ export class CarComponent implements OnInit {
 
 getCarDetail(e:ICar){
 this.carDetail.emit(e);
+}
+
+setRent(e:ICar){
+  this.rentService.value  = <IRentalDetail>{
+    carId : e.id
+  };
+  this.rentService.activeIndex = 0;
+  this.rentService.isNew = true;
+  this.rentService.isShow = true;
+  
 }
 }

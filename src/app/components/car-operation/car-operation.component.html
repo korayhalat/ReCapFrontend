@@ -15,4 +15,8 @@
         </p-tabPanel>
 
     </p-tabView>
+
+    <p-dialog header="Rental Detail" [(visible)]="rentService.isShow" [contentStyle]="{'height':'100%'}" [style]="{width: '40vw', 'height':'45vh'}" [breakpoints]="{'960px': '65vw', '640px': '98vw'}">
+        <app-rental-detail></app-rental-detail>
+    </p-dialog>
 </div>

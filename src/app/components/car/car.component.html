@@ -26,7 +26,9 @@
 
             <th>
 
-                <p-columnFilter type="text" field="name"></p-columnFilter>
+                <p-columnFilter type="text" field="dailyPrice" ></p-columnFilter>
+                <!-- <input pInputText type="text" (input)="dt.filter($event.target.value, 'dailyPrice', 'contains')" 
+                [value]="dt.filters['dailyPrice']" placeholder="Search by Name" class="p-column-filter"> -->
             </th>
             <th>
                 <p-columnFilter type="text" field="country.name"></p-columnFilter>
@@ -51,7 +53,7 @@
             <td>{{car.description}}</td>
             <td>
                 <span *ngIf="car.isRented">{{car.returnDate}}</span>
-                <p-button *ngIf="!car.isRented">Rent </p-button>
+                <p-button *ngIf="!car.isRented" (onClick)="setRent(car)">Rent </p-button>
             </td>
             <td>
                 <p-button (click) = "getCarDetail(car)">Detail</p-button>

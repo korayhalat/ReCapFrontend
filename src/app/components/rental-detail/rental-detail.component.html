@@ -1,1 +1,56 @@
-<p>rental-detail works!</p>
+<div  *ngIf="rentService.isNew; else detail">
+    <p-steps [model]="items" [activeIndex]="rentService.activeIndex"></p-steps>
+    <div *ngIf="rentService.activeIndex == 0" class="p-d-flex stepsdemo-content">
+        <div class="p-col-12">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="rent">RentDate</label>
+                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
+                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="p-field">
+                    <label for="return">Return Date</label>
+                    <p-calendar [(ngModel)]="returnDate" [minDate]="nowValue"  [readonlyInput]="true" 
+                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+    
+    <p-button label="Next" (onClick)="rentService.activeIndex = 1 "></p-button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="rentService.activeIndex == 1" class="p-d-flex stepsdemo-content">
+        <div class="p-col-12">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="rent">Payment Date</label>
+                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
+                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #detail>
+    <div class="p-d-flex">
+        <div class="p-col-12">
+            <div class="p-fluid">
+                <div class="p-field">
+                    <label for="rent">RentDate</label>
+                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
+                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="p-field">
+                    <label for="return">Return Date</label>
+                    <p-calendar [(ngModel)]="returnDate" [minDate]="nowValue"  [readonlyInput]="true" 
+                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                </div>
+    
+    <p-button label="Close"></p-button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+

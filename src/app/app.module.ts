@@ -16,6 +16,10 @@ import {TabViewModule} from 'primeng/tabview';
 import {DividerModule} from 'primeng/divider';
 import {CardModule} from 'primeng/card';
 import {GalleriaModule} from 'primeng/galleria';
+import {DialogModule} from 'primeng/dialog';
+import {CalendarModule} from 'primeng/calendar';
+import {StepsModule} from 'primeng/steps';
+import {MenuItem} from 'primeng/api'
 
 import { BrandFilterPipe } from './pipes/brand-filter.pipe';
 import { ColorFilterPipe } from './pipes/color-filter.pipe';
@@ -67,7 +71,10 @@ import { CarOperationComponent } from './components/car-operation/car-operation.
     TabViewModule,
     DividerModule,
     CardModule,
-    GalleriaModule
+    GalleriaModule,
+    DialogModule,
+    CalendarModule,
+    StepsModule
     // CdkVirtualScrollViewport
   ],
   providers: [],
