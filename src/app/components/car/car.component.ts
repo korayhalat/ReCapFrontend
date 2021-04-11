@@ -23,7 +23,9 @@ export class CarComponent implements OnInit {
 
   @Output() carDetail = new EventEmitter<ICar>();
 
-  constructor(private carService:CarService,private rentService: RentalDetailService, public messageService : MessageService) { }
+  constructor(
+    private carService:CarService,
+    private rentService: RentalDetailService) { }
 
   ngOnInit(): void {
     this.carService.getAll().subscribe(res=>{
