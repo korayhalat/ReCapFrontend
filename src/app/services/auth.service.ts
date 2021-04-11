@@ -24,6 +24,7 @@ export class AuthService {
     private localStorageService : LocalstorageService,
     private jwtHelper : JwtHelperService
   ) { }
+  
   login(login:ILogin):Observable<ISingleResponseModel<ITokenModel>>{
     let newPath = this.apiUrl + 'login';
     return this.http.post<ISingleResponseModel<ITokenModel>>(newPath,login);
