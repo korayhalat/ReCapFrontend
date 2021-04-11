@@ -46,6 +46,14 @@ export class AuthService {
     }
     return isAdmin;
   }
+  isAuthenticated(){
+    if (this.localStorageService.getToken()) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   loggedIn(){
     if(this.localStorageService.getToken()){
       return this.jwtHelper.isTokenExpired();

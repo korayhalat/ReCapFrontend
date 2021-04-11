@@ -44,6 +44,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ColorAddComponent } from './components/color-add/color-add.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 export function tokenGetter(){
   return localStorage.getItem("access_token");
@@ -69,6 +70,7 @@ export function tokenGetter(){
     RegisterComponent,
     BrandAddComponent,
     ColorAddComponent,
+    UserUpdateComponent,
     
   ],
   imports: [
@@ -93,7 +95,7 @@ export function tokenGetter(){
     StepsModule,
     ToastModule,
     PanelModule,
-    MenuModule,
+    MenuModule,      
     JwtModule.forRoot({
       config:{
         tokenGetter:tokenGetter,

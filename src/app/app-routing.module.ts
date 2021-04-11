@@ -12,6 +12,7 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalDetailComponent } from './components/rental-detail/rental-detail.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarOperationComponent },
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'carimages', component: CarImageComponent },
   { path: 'login', component : LoginComponent },
   { path: 'register', component : RegisterComponent},
+  { path: 'user/update', component : UserUpdateComponent},
+
 ];
 
 @NgModule({

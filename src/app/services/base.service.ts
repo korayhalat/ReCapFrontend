@@ -24,4 +24,11 @@ export class BaseService<T> {
    getById(id:any):Observable<IListResponseModel<T>>{
      return this.http.get<IListResponseModel<T>>(this.apiUrl+id);
    }
+   delete(item:T): Observable<IListResponseModel<T>> {
+    return this.http.post<IListResponseModel<T>>(this.apiUrl+'delete',item);
+  }
+
+  update(item: T): Observable<IListResponseModel<T>> {
+    return this.http.post<IListResponseModel<T>>(this.apiUrl+'update',item);
+  }
 }
