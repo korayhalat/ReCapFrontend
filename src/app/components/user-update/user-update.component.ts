@@ -1,13 +1,13 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import jwtDecode from 'jwt-decode';
+import { ToastrService } from 'ngx-toastr';
 import { IUserUpdate } from 'src/app/models/user-update';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { UserService } from 'src/app/services/user.service';
-import jwtDecode from 'jwt-decode'
-
 
 @Component({
   selector: 'app-user-update',
@@ -15,21 +15,18 @@ import jwtDecode from 'jwt-decode'
   styleUrls: ['./user-update.component.scss']
 })
 export class UserUpdateComponent implements OnInit {
-
-  passwordUpdateForm : FormGroup;
+  passwordUpdateForm: FormGroup;
   userUpdateForm: FormGroup;
-  user : IUserUpdate;
+  user: IUserUpdate;
   userId: number;
 
   constructor(
-    private formBuilder : FormBuilder,
-    private userService : UserService,
-    private authService : AuthService,
-    private route : Router,
-    private localStorage : LocalstorageService,
-    private messageService : MessageService
-
-  ) { }
+    private formBuilder: FormBuilder,
+    private userService: UserService,
+    private toastrService: ToastrService,
+    private authService: AuthService,
+    private route:Router,
+    private localStorage: LocalstorageService) { }
 
   ngOnInit(): void {
     this.getUserById();
@@ -37,10 +34,10 @@ export class UserUpdateComponent implements OnInit {
     this.userForm();
 
   }
-  
+
   getUserById() {
     let token = this.localStorage.getToken()
-    let id: number = Number(Object.values(jwtDecode(token))[0])
+    let id: number = Number(Object.values(jwtDecode(token))[0])//cerenesor
     this.userId = id;
     this.userService.getUserById(id).subscribe(response => {
       this.user = response.data;
@@ -54,6 +51,7 @@ export class UserUpdateComponent implements OnInit {
     })
 
   }
+
   userForm() {
     this.userUpdateForm = this.formBuilder.group({
       userId: [""],
@@ -63,6 +61,7 @@ export class UserUpdateComponent implements OnInit {
 
     })
   }
+
   updateUser(){
     if(this.userUpdateForm.valid){
       let userModel = Object.assign({}, this.userUpdateForm.value)
@@ -70,36 +69,32 @@ export class UserUpdateComponent implements OnInit {
       let id:number=Number(Object.values(jwtDecode(token))[0])
       userModel.userId =id
       this.userService.update(userModel).subscribe(response=>{
-        this.messageService.add({key: 'koray', severity:'success', 
-        summary: 'Başlık', detail: 'Başaralı'});
+        this.toastrService.success(response.message,"Başarılı")
         this.localStorage.removeToken();
         this.route.navigate(["/login"])
       },responseError=> {
-        this.messageService.add({key: 'koray', severity:'success', 
-        summary: 'Başlık', detail: 'Güncellenmedi'});
+        this.toastrService.error("Güncellenmedi");
       })
     }
     else{
-      this.messageService.add({key: 'koray', severity:'danger', 
-      summary: 'Başlık', detail: 'Eksik Form'});
+      this.toastrService.warning("Form eksik","dikkat")
     }
   }
+
+
   updatePassword(){
     if(this.passwordUpdateForm.valid){
        let updatePassword = Object.assign({},this.passwordUpdateForm.value)
        this.userService.changeUserPassword(updatePassword).subscribe(response=>{        
-        this.messageService.add({key: 'koray', severity:'success', 
-        summary: 'Başlık', detail: 'Başaralı'}); 
+         this.toastrService.success(response.message,"başarılı") 
          this.localStorage.removeToken(); 
          this.route.navigate(["/login"])
        },responseError=>{
-        this.messageService.add({key: 'koray', severity:'danger', 
-        summary: 'Başlık', detail: 'Güncellenmedi'});
+         this.toastrService.error("güncellenemedi")
        })
     }
     else{
-      this.messageService.add({key: 'koray', severity:'success', 
-      summary: 'Başlık', detail: 'Eksik Form'});
+      this.toastrService.warning("Form eksik","Dikkat !")
     }
   }
 }

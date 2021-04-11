@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import { ToastrModule} from "ngx-toastr";
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,7 @@ import {GalleriaModule} from 'primeng/galleria';
 import {DialogModule} from 'primeng/dialog';
 import {CalendarModule} from 'primeng/calendar';
 import {StepsModule} from 'primeng/steps';
-import {MenuItem, MessageService} from 'primeng/api';
+import {MenuItem} from 'primeng/api';
 import {ToastModule} from 'primeng/toast';
 import {PanelModule} from 'primeng/panel';
 import {MenuModule} from 'primeng/menu';
@@ -41,10 +42,9 @@ import { AppMenuTopComponent } from './app.menutop.component';
 import { CarOperationComponent } from './components/car-operation/car-operation.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { ColorAddComponent } from './components/color-add/color-add.component';
 import { UserUpdateComponent } from './components/user-update/user-update.component';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 export function tokenGetter(){
   return localStorage.getItem("access_token");
@@ -68,8 +68,6 @@ export function tokenGetter(){
     CarOperationComponent,
     LoginComponent,
     RegisterComponent,
-    BrandAddComponent,
-    ColorAddComponent,
     UserUpdateComponent,
     
   ],
@@ -95,7 +93,10 @@ export function tokenGetter(){
     StepsModule,
     ToastModule,
     PanelModule,
-    MenuModule,      
+    MenuModule,  
+    ToastrModule.forRoot({
+      positionClass :"toast-bottom-right"
+    }),    
     JwtModule.forRoot({
       config:{
         tokenGetter:tokenGetter,
@@ -106,7 +107,7 @@ export function tokenGetter(){
     // CdkVirtualScrollViewport
   ],
   providers: [
-    MessageService
+    {provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}
   ],
   bootstrap: [AppComponent]
 })

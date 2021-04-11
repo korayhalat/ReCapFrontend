@@ -7,6 +7,9 @@ import { BaseService } from './base.service';
   providedIn: 'root'
 })
 export class RentalDetailService extends BaseService<IRentalDetail> {
+  checkFindeksScore(id: number) {
+    throw new Error('Method not implemented.');
+  }
   value:IRentalDetail;
   isNew:boolean;
   isShow:boolean;

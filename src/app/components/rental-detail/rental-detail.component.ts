@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
-import { IRentalDetail } from 'src/app/models/rental-detail';
 import { RentalDetailService } from 'src/app/services/rental-detail.service';
 
 @Component({

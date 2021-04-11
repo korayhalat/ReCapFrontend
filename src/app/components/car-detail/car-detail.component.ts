@@ -20,7 +20,7 @@ export class CarDetailComponent implements OnInit {
   formModel: IFormModule[]=[];
   formGroup: FormGroup;
 
-  constructor(private imageService:CarImagesService, public rentService: RentalDetailService ) { }
+  constructor(private carImageService:CarImagesService, private rentService: RentalDetailService ) { }
 
   ngOnInit(): void {
   }
@@ -47,25 +47,26 @@ export class CarDetailComponent implements OnInit {
   }
 
 
-  ngOnChanges(){
-
-    if(this.car){
-      this.images=[];
-      this.imageService.getImagesByCarId(this.car.id).subscribe(s=>{        
-        this.images = s.data;
-      } );
-    }   
-    
+  ngOnChanges() {
+    if (this.car) {
+      this.images = [];
+      this.carImageService.getImagesByCarId(this.car.id).subscribe(response => {
+        this.createForm();
+        this.images = response.data;
+      })
+    }
   }
 
-  setRent(){
-    this.rentService.value  = <IRentalDetail>{
-      carId : this.car.id,
+  sendRent() {   
+    let renDetail = <IRentalDetail>{
+      carId: this.car.id,
+      returnDate:null,
       rentDate:new Date()
-    };
+    }
     this.rentService.activeIndex = 0;
+    this.rentService.value = renDetail;
     this.rentService.isNew = true;
     this.rentService.isShow = true;
+    this.rentService.checkFindeksScore(this.car.id);
   }
-
 }
