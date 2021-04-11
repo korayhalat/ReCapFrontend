@@ -1,4 +1,6 @@
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { ICar } from 'src/app/models/car';
 import { IRentalDetail } from 'src/app/models/rental-detail';
 import { CarService } from 'src/app/services/car.service';
@@ -21,14 +23,15 @@ export class CarComponent implements OnInit {
 
   @Output() carDetail = new EventEmitter<ICar>();
 
-  constructor(private carService:CarService,private rentService: RentalDetailService) { }
+  constructor(private carService:CarService,private rentService: RentalDetailService, public messageService : MessageService) { }
 
   ngOnInit(): void {
     this.carService.getAll().subscribe(res=>{
       this.cars = res.data;
       console.log(this.cars);
       
-
+      // this.messageService.add({key: 'koray', severity:'success', summary: 'Başlık', detail: 'Mesaj Detayı'});
+      
       this.brandOpt = [ ...new Set(this.cars.map(m=> m.brandText))].map(x=> {return {label:x,value:x}})
       .sort((a,b) => (a.label > b.label) ? 1 : -1);
 
@@ -47,11 +50,11 @@ this.carDetail.emit(e);
 
 setRent(e:ICar){
   this.rentService.value  = <IRentalDetail>{
-    carId : e.id
+    carId : e.id,
+    rentDate:new Date()
   };
   this.rentService.activeIndex = 0;
   this.rentService.isNew = true;
-  this.rentService.isShow = true;
-  
+  this.rentService.isShow = true;  
 }
 }

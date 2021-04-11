@@ -19,7 +19,10 @@ import {GalleriaModule} from 'primeng/galleria';
 import {DialogModule} from 'primeng/dialog';
 import {CalendarModule} from 'primeng/calendar';
 import {StepsModule} from 'primeng/steps';
-import {MenuItem} from 'primeng/api'
+import {MenuItem, MessageService} from 'primeng/api';
+import {ToastModule} from 'primeng/toast';
+import {PanelModule} from 'primeng/panel';
+import {MenuModule} from 'primeng/menu';
 
 import { BrandFilterPipe } from './pipes/brand-filter.pipe';
 import { ColorFilterPipe } from './pipes/color-filter.pipe';
@@ -36,7 +39,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AppMenuTopComponent } from './app.menutop.component';
 import { CarOperationComponent } from './components/car-operation/car-operation.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ColorAddComponent } from './components/color-add/color-add.component';
 
+export function tokenGetter(){
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -53,7 +64,12 @@ import { CarOperationComponent } from './components/car-operation/car-operation.
     RentalComponent,
     RentalDetailComponent,
     AppMenuTopComponent,
-    CarOperationComponent
+    CarOperationComponent,
+    LoginComponent,
+    RegisterComponent,
+    BrandAddComponent,
+    ColorAddComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -74,10 +90,22 @@ import { CarOperationComponent } from './components/car-operation/car-operation.
     GalleriaModule,
     DialogModule,
     CalendarModule,
-    StepsModule
+    StepsModule,
+    ToastModule,
+    PanelModule,
+    MenuModule,
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:tokenGetter,
+        allowedDomains:["http://localhost:4200"]
+      },
+    }),
+    
     // CdkVirtualScrollViewport
   ],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

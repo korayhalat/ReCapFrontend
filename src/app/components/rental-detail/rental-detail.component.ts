@@ -14,7 +14,7 @@ export class RentalDetailComponent implements OnInit,OnChanges {
   rentDate:Date;
   returnDate?:Date;
   items: MenuItem[];
-
+  minReturn:Date = new Date();
   constructor(public rentService: RentalDetailService) { }
 
   ngOnInit(): void {
@@ -23,20 +23,28 @@ export class RentalDetailComponent implements OnInit,OnChanges {
       {label: 'Rental Dates'},
       {label: 'Payment'}
     ];
-    this.setData();
+    // this.setData();
   }
 
   ngOnChanges(){
-    console.log("change");
-    
-    this.setData();
+    // console.log("change");    
+    // this.setData();
   }
+
+  rentSelect(e:any){
+let rentDate:Date = new Date(e);
+this.minReturn = rentDate;
+if(this.rentService.value.returnDate &&  this.rentService.value.returnDate.getTime() < rentDate.getTime()){
+  this.rentService.value.returnDate = rentDate;
+}
+
+  };
 
   setData(){
     this.nowValue = new Date();
     this.rentDate = this.rentService.value ? this.rentService.value.rentDate : this.nowValue;
     this.returnDate = this.rentService.value ? this.rentService.value.returnDate : null;
-    console.log(this.rentService.value);
+   
     
   }
 

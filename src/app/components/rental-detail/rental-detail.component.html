@@ -5,13 +5,15 @@
             <div class="p-fluid">
                 <div class="p-field">
                     <label for="rent">RentDate</label>
-                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
-                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <p-calendar [(ngModel)]="rentService.value.rentDate" [minDate]="nowValue" appendTo="body" 
+                    [readonlyInput]="true" (onSelect)="rentSelect($event)"
+                    dateFormat="dd.mm.yy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
                 </div>
                 <div class="p-field">
                     <label for="return">Return Date</label>
-                    <p-calendar [(ngModel)]="returnDate" [minDate]="nowValue"  [readonlyInput]="true" 
-                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <p-calendar [(ngModel)]="rentService.value.returnDate" [minDate]="minReturn"  appendTo="body"
+                    [readonlyInput]="true" 
+                    dateFormat="dd.mm.yy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
                 </div>
     
     <p-button label="Next" (onClick)="rentService.activeIndex = 1 "></p-button>
@@ -23,10 +25,10 @@
             <div class="p-fluid">
                 <div class="p-field">
                     <label for="rent">Payment Date</label>
+                    
                     <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
                     dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
-                </div>
-    
+                </div>    
             </div>
         </div>
     </div>

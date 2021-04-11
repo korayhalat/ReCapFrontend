@@ -1,1 +1,35 @@
-<p>brand works!</p>
+<p-table #dt [value]="[0]">
+    <ng-template pTemplate="header">
+        <tr>
+            <!-- <th>Brand Id</th> -->
+            <th>Brand Name</th>
+            <th>Brand Add</th>
+            <th>Brand Update</th>
+        </tr>
+        <tr>
+            <!-- <th></th> -->
+            <th>
+                <input pInputText type="text" [(ngModel)]="brandFilterText" 
+                class="form-control" id="brandFilterText"
+                    placeholder="Search" />
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <tr *ngFor="let brand of brands | brandFilter:brandFilterText">
+            <!-- <td>{{ brand.brandId }}</td> -->
+            <td>{{ brand.brandName }}</td>
+            <td>
+                <button (click)="showBrandDialog()" routerLink="add" 
+                pButton pRipple type="button" label="Add"
+                    class="p-button-outlined p-button-secondary"></button>
+            </td>
+            <td>
+                <button pButton pRipple type="button" label="Update"
+                    class="p-button-outlined p-button-secondary"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
