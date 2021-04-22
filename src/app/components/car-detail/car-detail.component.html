@@ -1,6 +1,8 @@
 <div *ngIf="car" class="p-d-flex">
-    <div class="p-col-12 p-md-3">
+    <div class="p-col-12 p-md-4">
         <div class="p-fluid">
+            <!-- <recap-form *ngIf="formModel && formModel.length > 0" [forms]="formModel" 
+                [formGroup]="formGroup" (update)="test($event)" [buttonLabel]="'Update'"></recap-form> -->
             <div class="p-field">
                 <label for="brandName">Brand Name</label>
                 <input id="brandName" readonly value="{{car.brandText}}" type="text" pInputText>
@@ -21,32 +23,31 @@
                 <label for="description">Description</label>
                 <input id="description" readonly value="{{car.description}}" type="text" pInputText>
             </div>
-
-                <div *ngIf="car.isRented; else rent" class="p-field">
+            <div *ngIf="car.isRented; else rent">
+                <div class="p-field">
                     <label for="date">Return Date</label>
                     <input id="date" readonly value="{{car.returnDate}}" type="text" pInputText>
                 </div>
+            </div>
             <ng-template #rent>
                 <div class="p-col-12">
-                    <button pButton (click)="setRent()" label="Rent"> </button>
+                    <button (click)="sendRent()" class="p-button-secondary" pButton label="Rent"></button>
                 </div>
             </ng-template>
-
         </div>
     </div>
     <p-divider layout="vertical"></p-divider>
-    <div class="p-col-12 p-md-9">
-
-        <p-galleria *ngIf="images && images.length>0" [(value)]="images"
+    <div class="p-col-12 p-md-8">
+        <p-galleria *ngIf="images && images.length>0" [(value)]="images" 
             [containerStyle]="{'width':'95%','max-width': '900px','min-width':'350px'}" [numVisible]="5"
             [circular]="true" [showItemNavigators]=" images.length > 1" [showItemNavigatorsOnHover]="true"
-            [showThumbnails]="true">
+            [showThumbnails]=" images.length > 1">
             <ng-template pTemplate="item" let-item>
-                <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo' + item.id" style="width: 100%; display: block;" />
+                <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo'+item.id" style="width: 100%; display: block;" />
             </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
                 <div class="p-grid p-nogutter p-justify-center">
-                    <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo '+ item.id"
+                    <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo'+item.id"
                         style="width: 100%; display: block;" />
                 </div>
             </ng-template>

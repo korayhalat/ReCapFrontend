@@ -26,8 +26,8 @@ export class BrandComponent implements OnInit {
     private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.roles=this.authService.getUser().roles; 
-    console.log(this.roles.indexOf('brand.operation'));
+    // this.roles=this.authService.getUser().roles; 
+    // console.log(this.roles.indexOf('brand.operation'));
        
     this.getBrands();
     this.createAddForm();

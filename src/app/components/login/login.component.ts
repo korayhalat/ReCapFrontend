@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let loginModel = Object.assign({}, this.loginForm.value)
       this.authService.login(loginModel).subscribe(response => {        
+        console.log(response);
+        
         this.localStorage.saveToken(response.data.token);
         this.authService.decodedTokenKey = this.authService.decodedToken(response.data.token);
         this.authService.getUser();

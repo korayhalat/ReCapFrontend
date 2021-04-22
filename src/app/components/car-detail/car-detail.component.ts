@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ICar } from 'src/app/models/car';
-import { IFormModule } from 'src/app/models/formModel';
+import { IFormModel } from 'src/app/models/formModel';
 import { IRentalDetail } from 'src/app/models/rental-detail';
 import { CarImagesService } from 'src/app/services/car-images.service';
 import { RentalDetailService } from 'src/app/services/rental-detail.service';
@@ -17,7 +17,7 @@ export class CarDetailComponent implements OnInit {
   @Input() car : ICar = <ICar>{};
   images:any[]=[];
   apiUrl:string = environment.apiUrl.substr(0,environment.apiUrl.length-4);
-  formModel: IFormModule[]=[];
+  formModel : IFormModel[]=[];
   formGroup: FormGroup;
 
   constructor(private carImageService:CarImagesService, private rentService: RentalDetailService ) { }

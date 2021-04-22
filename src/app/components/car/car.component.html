@@ -54,7 +54,7 @@
             <td>{{car.description}}</td>
             <td>
                 <span *ngIf="car.isRented">{{car.returnDate}}</span>
-                <p-button *ngIf="!car.isRented" (onClick)="setRent(car)">Rent </p-button>
+                <p-button *ngIf="!car.isRented" (onClick)="sendRent(car)">Rent</p-button>
             </td>
             <td>
                 <p-button (click) = "getCarDetail(car)">Detail</p-button>

@@ -1,4 +1,4 @@
-export interface IFormModule{
+export interface IFormModel{
     type: string;
     control: string;
     options?: any[];

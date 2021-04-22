@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../models/user';
 import { LocalstorageService } from './localstorage.service';
-import {JwtHelperService} from '@auth0/angular-jwt'
 import { ILogin } from '../models/login';
 import { Observable } from 'rxjs';
 import { ISingleResponseModel } from '../models/single-response-model';
 import { ITokenModel } from '../models/token-models';
 import { IRegister } from '../models/register';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'

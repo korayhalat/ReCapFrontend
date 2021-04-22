@@ -1,5 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { IRentalDetail } from 'src/app/models/rental-detail';
+import { AuthService } from 'src/app/services/auth.service';
 import { RentalDetailService } from 'src/app/services/rental-detail.service';
 
 @Component({
@@ -12,9 +14,11 @@ export class RentalDetailComponent implements OnInit,OnChanges {
   nowValue:Date;
   rentDate:Date;
   returnDate?:Date;
+  rent : IRentalDetail;
   items: MenuItem[];
   minReturn:Date = new Date();
-  constructor(public rentService: RentalDetailService) { }
+
+  constructor(public rentService: RentalDetailService,private authService : AuthService) { }
 
   ngOnInit(): void {
 
@@ -22,29 +26,40 @@ export class RentalDetailComponent implements OnInit,OnChanges {
       {label: 'Rental Dates'},
       {label: 'Payment'}
     ];
-    // this.setData();
+    this.setData();
   }
 
   ngOnChanges(){
-    // console.log("change");    
-    // this.setData();
+    
+    this.setData();
   }
 
   rentSelect(e:any){
-let rentDate:Date = new Date(e);
-this.minReturn = rentDate;
-if(this.rentService.value.returnDate &&  this.rentService.value.returnDate.getTime() < rentDate.getTime()){
+  let rentDate:Date = new Date(e);
+  this.minReturn = rentDate;
+  if(this.rentService.value.returnDate &&  this.rentService.value.returnDate.getTime() < rentDate.getTime()){
   this.rentService.value.returnDate = rentDate;
-}
+  }
 
   };
 
   setData(){
     this.nowValue = new Date();
     this.rentDate = this.rentService.value ? this.rentService.value.rentDate : this.nowValue;
-    this.returnDate = this.rentService.value ? this.rentService.value.returnDate : null;
-   
+    this.returnDate = this.rentService.value ? this.rentService.value.returnDate : null;  
     
+  }
+  createRent(){
+    this.rentService.activeIndex=1
+    let id=this.authService.user.userId;
+
+    let rent:IRentalDetail={
+      customerId:id,
+      rentDate:this.rentDate,
+      returnDate:this.rentDate,
+      carId:this.rentService.value.carId
+    }
+    this.rent=rent;
   }
 
 }

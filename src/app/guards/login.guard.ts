@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { MessageService } from "primeng/api";
+import { ToastrService } from "ngx-toastr";
 import { Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
 
@@ -8,8 +8,14 @@ import { AuthService } from "../services/auth.service";
     providedIn: 'root'
   })
   export class LoginGuard implements CanActivate {
+    
   
-    constructor(private authService:AuthService, private router:Router, public messageService: MessageService){}
+    constructor(
+      private authService:AuthService, 
+      private router:Router,
+      private toastrservice:ToastrService){}
+
+
     canActivate(
       route: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -18,8 +24,7 @@ import { AuthService } from "../services/auth.service";
           return true
         }else{
           this.router.navigate(["login"])
-          this.messageService.add({key: 'koray', severity:'success', 
-          summary: 'Register', detail: 'Siseteme Giriş Yapınız'});
+          this.toastrservice.info("Lütfen Sisteme Giriş Yapınız")
           return false;
         }
     }

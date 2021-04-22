@@ -1,34 +1,30 @@
-<div  *ngIf="rentService.isNew; else detail">
-    <p-steps [model]="items" [activeIndex]="rentService.activeIndex"></p-steps>
-    <div *ngIf="rentService.activeIndex == 0" class="p-d-flex stepsdemo-content">
+<div *ngIf="rentService.isNew; else detail">
+    <p-steps [activeIndex]="rentService.activeIndex" [model]="items" [readonly]="false"></p-steps>
+    <div *ngIf="rentService.activeIndex==0" class="p-d-flex">
         <div class="p-col-12">
             <div class="p-fluid">
                 <div class="p-field">
-                    <label for="rent">RentDate</label>
-                    <p-calendar [(ngModel)]="rentService.value.rentDate" [minDate]="nowValue" appendTo="body" 
-                    [readonlyInput]="true" (onSelect)="rentSelect($event)"
-                    dateFormat="dd.mm.yy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <label for="rent">Rent Date</label>
+                    <p-calendar [(ngModel)]="rentService.value.rentDate" (onSelect)="rentSelect($event)"
+                        [minDate]="nowValue" appendTo="body" [readonlyInput]="true" dateFormat="dd.mm.yy"
+                        [showIcon]="true" [showButtonBar]="true"></p-calendar>
                 </div>
                 <div class="p-field">
                     <label for="return">Return Date</label>
-                    <p-calendar [(ngModel)]="rentService.value.returnDate" [minDate]="minReturn"  appendTo="body"
-                    [readonlyInput]="true" 
-                    dateFormat="dd.mm.yy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <p-calendar [(ngModel)]="rentService.value.returnDate" appendTo="body" [minDate]="minReturn"
+                        [showIcon]="true" [readonlyInput]="true" dateFormat="dd.mm.yy" [showButtonBar]="true">
+                    </p-calendar>
                 </div>
-    
-    <p-button label="Next" (onClick)="rentService.activeIndex = 1 "></p-button>
+                <button (click)="createRent()" class="p-button-outlined" pButton label="Next"></button>
             </div>
         </div>
     </div>
-    <div *ngIf="rentService.activeIndex == 1" class="p-d-flex stepsdemo-content">
+    <div *ngIf="rentService.activeIndex==1" class="p-d-flex">
         <div class="p-col-12">
             <div class="p-fluid">
                 <div class="p-field">
-                    <label for="rent">Payment Date</label>
-                    
-                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
-                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
-                </div>    
+                    <app-payment [rentForPayment]="rent"></app-payment>
+                </div>
             </div>
         </div>
     </div>
@@ -39,17 +35,16 @@
         <div class="p-col-12">
             <div class="p-fluid">
                 <div class="p-field">
-                    <label for="rent">RentDate</label>
-                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" 
-                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <label for="rent">Rent Date</label>
+                    <p-calendar [(ngModel)]="rentDate" [minDate]="nowValue" [readonlyInput]="true" dateFormat="dd.mm.yy"
+                        [showIcon]="true" [showButtonBar]="true"></p-calendar>
                 </div>
                 <div class="p-field">
                     <label for="return">Return Date</label>
-                    <p-calendar [(ngModel)]="returnDate" [minDate]="nowValue"  [readonlyInput]="true" 
-                    dateFormat="dd.mm.yyyy" [showButtonBar]="true" [showIcon]="true"></p-calendar>
+                    <p-calendar [(ngModel)]="returnDate" [minDate]="nowValue" [showIcon]="true" [readonlyInput]="true"
+                        dateFormat="dd.mm.yy" [showButtonBar]="true"></p-calendar>
                 </div>
-    
-    <p-button label="Close"></p-button>
+                <button pButton label="Close"></button>
             </div>
         </div>
     </div>

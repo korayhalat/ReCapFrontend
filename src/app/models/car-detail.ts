@@ -1,7 +1,11 @@
 export interface ICarDetail {
-    carId:number;
-    description:string;
-    dailyPrice:number;
-    brandName:string;
-    colorName:string;    
+    carId: number;
+    brandId:number,
+    colorId:number,
+    brandName: string;
+    modelYear:string;
+    colorName: string;
+    dailyPrice: number;
+    description: string;
+    minFindeks:number;    
 }

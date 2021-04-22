@@ -1,11 +1,9 @@
 export interface ICreditCard{
-    id:number;
+    id?:number;
     customerId:number;
     fullName:string;
     cardNumber:string;
-    expiryMounth:number;
-    expiryYear:number;
+    expiryDate:string;
     cvc:string;
-    type:string;
 
 }

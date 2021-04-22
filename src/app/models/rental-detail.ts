@@ -1,12 +1,12 @@
 export interface IRentalDetail {
-    id :number;
+    id? :number;
     carId:number;
-    userId:number;
+    // userId:number;
     customerId:number;
-    description:string;
-    brandName:string;
-    colorName:string;
-    userName:string;
+    // description:string;
+    // brandName:string;
+    // colorName:string;
+    // userName:string;
     rentDate:Date;
     returnDate?:Date;
 }

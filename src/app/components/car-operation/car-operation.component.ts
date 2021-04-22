@@ -12,6 +12,7 @@ export class CarOperationComponent implements OnInit {
   activeIndex:number = 0;
   car:ICar;
   detailHeader:string="";
+  rentalDetailShow:boolean;
 
   
   constructor(public rentService:RentalDetailService) { }
