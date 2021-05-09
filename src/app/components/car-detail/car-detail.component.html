@@ -43,7 +43,8 @@
             [circular]="true" [showItemNavigators]=" images.length > 1" [showItemNavigatorsOnHover]="true"
             [showThumbnails]=" images.length > 1">
             <ng-template pTemplate="item" let-item>
-                <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo'+item.id" style="width: 100%; display: block;" />
+                <img [src]="apiUrl+item.imagePath" [alt]="'Car Photo'+item.id" 
+                style="width: 100%; display: block;" />
             </ng-template>
             <ng-template pTemplate="thumbnail" let-item>
                 <div class="p-grid p-nogutter p-justify-center">

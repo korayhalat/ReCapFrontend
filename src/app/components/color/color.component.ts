@@ -18,7 +18,10 @@ export class ColorComponent implements OnInit {
   colorAddForm: FormGroup;
   colorUpdateForm: FormGroup;
   colorFilterText = "";
-  constructor(private colorService: ColorService, private formbuilder: FormBuilder, private toastrService: ToastrService) { }
+  constructor(
+    private colorService: ColorService, 
+    private formbuilder: FormBuilder, 
+    private toastrService: ToastrService) { }
 
   ngOnInit(): void {
     this.getColors();
